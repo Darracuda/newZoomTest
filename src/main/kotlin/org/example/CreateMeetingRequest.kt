@@ -3,7 +3,7 @@ package org.example
 /**
  * Meeting object
  */
-data class Meeting (
+data class CreateMeetingRequest (
     /* Meeting topic */
     val topic: kotlin.String? = null,
     /* Meeting Type */

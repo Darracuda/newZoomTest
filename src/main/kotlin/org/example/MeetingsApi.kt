@@ -9,29 +9,26 @@ class MeetingsApi(basePath: kotlin.String = "https://api.zoom.us/v2") : ApiClien
      * @return InlineResponse2012
      */
     @Suppress("UNCHECKED_CAST")
-    fun meetingCreate(userId: kotlin.String, body: kotlin.Any?) : InlineResponse2012 {
-        val localVariableBody: kotlin.Any? = body
-        val localVariableQuery: MultiValueMap = mapOf()
-
-        val contentHeaders: kotlin.collections.Map<kotlin.String,kotlin.String> = mapOf()
+    fun createMeeting(token: String, userId: kotlin.String, request: CreateMeetingRequest) : CreateMeetingResponse {
         val acceptsHeaders: kotlin.collections.Map<kotlin.String,kotlin.String> = mapOf("Accept" to "application/json, application/xml")
-        val localVariableHeaders: kotlin.collections.MutableMap<kotlin.String,kotlin.String> = mutableMapOf()
-        localVariableHeaders.putAll(contentHeaders)
-        localVariableHeaders.putAll(acceptsHeaders)
+        val tokenHeaders: kotlin.collections.Map<kotlin.String,kotlin.String> = mapOf("Authorization" to "Bearer " + token)
+        val headers: kotlin.collections.MutableMap<kotlin.String,kotlin.String> = mutableMapOf()
+        headers.putAll(acceptsHeaders)
+        headers.putAll(tokenHeaders)
 
-        val localVariableConfig = RequestConfig(
+        val config = RequestConfig(
             RequestMethod.POST,
             "/users/{userId}/meetings".replace("{"+"userId"+"}", "$userId"),
-            query = localVariableQuery,
-            headers = localVariableHeaders
+            query = mapOf(),
+            headers = headers
         )
-        val response = request<InlineResponse2012>(
-            localVariableConfig,
-            localVariableBody
+        val response = request<CreateMeetingResponse>(
+            config,
+            request
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as InlineResponse2012
+            ResponseType.Success -> (response as Success<*>).data as CreateMeetingResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
