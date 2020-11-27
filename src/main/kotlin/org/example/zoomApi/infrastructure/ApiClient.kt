@@ -62,13 +62,13 @@ open class ApiClient(val baseUrl: String) {
         TODO("requestBody currently only supports JSON body and File body.")
     }
 
-    inline protected fun <reified T: Any?> responseBody(response: Response, mediaType: String = JsonMediaType): T? {
+    protected inline fun <reified T: Any?> responseBody(response: Response, mediaType: String = JsonMediaType): T? {
         if(response.body() == null) return null
 
         if(T::class.java == java.io.File::class.java){
             return downloadFileFromResponse(response) as T
-        } else if(T::class == kotlin.Unit::class) {
-            return kotlin.Unit as T
+        } else if(T::class == Unit::class) {
+            return Unit as T
         }
 
         var contentType = response.headers().get("Content-Type")
@@ -177,7 +177,7 @@ open class ApiClient(val baseUrl: String) {
     @Throws(IOException::class)
     fun prepareDownloadFile(response: Response): File {
         var filename: String? = null
-        var contentDisposition = response.headers().get("Content-Disposition")
+        val contentDisposition = response.headers().get("Content-Disposition")
 
         if(contentDisposition != null && contentDisposition != ""){
             val pattern = Pattern.compile("filename=['\"]?([^'\"\\s]+)['\"]?")
@@ -196,7 +196,7 @@ open class ApiClient(val baseUrl: String) {
             val pos = filename.lastIndexOf('.')
 
             if (pos == -1) {
-                prefix = filename + "-";
+                prefix = "$filename-"
             } else {
                 prefix = filename.substring(0, pos) + "-"
                 suffix = filename.substring(pos)
@@ -206,6 +206,6 @@ open class ApiClient(val baseUrl: String) {
                 prefix = "download-"
         }
 
-        return File.createTempFile(prefix, suffix);
+        return File.createTempFile(prefix, suffix)
     }
 }

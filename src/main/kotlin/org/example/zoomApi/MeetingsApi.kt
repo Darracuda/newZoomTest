@@ -9,7 +9,6 @@ class MeetingsApi(basePath: String = "https://api.zoom.us/v2") : ApiClient(baseP
      * Create a meeting
      * Create a meeting for a user &lt;aside&gt;The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.&lt;/aside&gt;
      * @param userId The user ID or email address
-     * @param body Meeting object
      * @return InlineResponse2012
      */
     @Suppress("UNCHECKED_CAST")

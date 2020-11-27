@@ -33,7 +33,7 @@ open class ServerException : RuntimeException {
 
      * @param   message   the detail message.
      */
-    constructor(message: kotlin.String) : super(message)
+    constructor(message: String) : super(message)
 
     companion object {
         private const val serialVersionUID: Long = 456L
