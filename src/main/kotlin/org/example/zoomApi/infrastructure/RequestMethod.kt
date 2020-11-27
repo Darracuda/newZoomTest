@@ -1,4 +1,4 @@
-package org.example
+package org.example.zoomApi.infrastructure
 
 /**
  * Provides enumerated HTTP verbs

@@ -1,9 +1,9 @@
-package org.example
+package org.example.zoomApi.infrastructure
 
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
-import java.time.LocalDateTime
+import org.example.zoomApi.adapters.JsonZonedDateTimeAdapter
 import java.time.ZonedDateTime
 import java.util.*
 

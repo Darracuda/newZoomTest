@@ -1,4 +1,4 @@
-package org.example
+package org.example.zoomApi.infrastructure
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

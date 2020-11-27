@@ -1,6 +1,10 @@
-package org.example
+package org.example.zoomApi
 
-class MeetingsApi(basePath: kotlin.String = "https://api.zoom.us/v2") : ApiClient(basePath) {
+import org.example.zoomApi.models.CreateMeetingRequest
+import org.example.zoomApi.models.CreateMeetingResponse
+import org.example.zoomApi.infrastructure.*
+
+class MeetingsApi(basePath: String = "https://api.zoom.us/v2") : ApiClient(basePath) {
     /**
      * Create a meeting
      * Create a meeting for a user &lt;aside&gt;The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.&lt;/aside&gt;
@@ -9,16 +13,16 @@ class MeetingsApi(basePath: kotlin.String = "https://api.zoom.us/v2") : ApiClien
      * @return InlineResponse2012
      */
     @Suppress("UNCHECKED_CAST")
-    fun createMeeting(token: String, userId: kotlin.String, request: CreateMeetingRequest) : CreateMeetingResponse {
-        val acceptsHeaders: kotlin.collections.Map<kotlin.String,kotlin.String> = mapOf("Accept" to "application/json, application/xml")
-        val tokenHeaders: kotlin.collections.Map<kotlin.String,kotlin.String> = mapOf("Authorization" to "Bearer " + token)
-        val headers: kotlin.collections.MutableMap<kotlin.String,kotlin.String> = mutableMapOf()
+    fun createMeeting(token: String, userId: String, request: CreateMeetingRequest) : CreateMeetingResponse {
+        val acceptsHeaders: Map<String,String> = mapOf("Accept" to "application/json, application/xml")
+        val tokenHeaders: Map<String,String> = mapOf("Authorization" to "Bearer $token")
+        val headers: MutableMap<String,String> = mutableMapOf()
         headers.putAll(acceptsHeaders)
         headers.putAll(tokenHeaders)
 
         val config = RequestConfig(
             RequestMethod.POST,
-            "/users/{userId}/meetings".replace("{"+"userId"+"}", "$userId"),
+            "/users/{userId}/meetings".replace("{"+"userId"+"}", userId),
             query = mapOf(),
             headers = headers
         )

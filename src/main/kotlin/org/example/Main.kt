@@ -1,5 +1,9 @@
 package org.example
 
+import org.example.zoomApi.MeetingsApi
+import org.example.zoomApi.models.CreateMeetingRequest
+import org.example.zoomApi.infrastructure.ClientException
+import org.example.zoomApi.infrastructure.ServerException
 import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -21,7 +25,7 @@ fun createMeeting(topic: String, agenda: String, startTime: LocalDateTime, zoneI
     val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6ImctQ0M4VUdzVFdDNHpmRi0wbkdobWciLCJleHAiOjE2MDY5NDkyNDQsImlhdCI6MTYwNjM0NDQ0NH0.xqp3OwaL-QP74CYE9JSNXShG52p7P5sZFsJl3Xe6a4I"
 
     val apiInstance = MeetingsApi()
-    val meetingSettings = MeetingSettings(
+    val meetingSettings = CreateMeetingRequest.MeetingSettings(
             host_video = true,
             participant_video = true,
             cn_meeting = false,
@@ -30,9 +34,9 @@ fun createMeeting(topic: String, agenda: String, startTime: LocalDateTime, zoneI
             mute_upon_entry = true,
             watermark = false,
             use_pmi = false,
-            approval_type = MeetingSettings.ApprovalType.automaticallyApprove,
-            audio = MeetingSettings.Audio.both,
-            auto_recording = MeetingSettings.AutoRecording.local,
+            approval_type = CreateMeetingRequest.MeetingSettings.ApprovalType.automaticallyApprove,
+            audio = CreateMeetingRequest.MeetingSettings.Audio.both,
+            auto_recording = CreateMeetingRequest.MeetingSettings.AutoRecording.local,
     )
     val request = CreateMeetingRequest(
             topic = topic,
@@ -62,14 +66,12 @@ fun createMeeting(topic: String, agenda: String, startTime: LocalDateTime, zoneI
 
 fun toUTC(input: LocalDateTime, zoneId: ZoneId): ZonedDateTime {
     val zdt = ZonedDateTime.of(input, zoneId)
-    val zdt2 = zdt.withZoneSameInstant(ZoneOffset.UTC)
-    return zdt2
+    return zdt.withZoneSameInstant(ZoneOffset.UTC)
 }
 
 
 fun toLocal(input: ZonedDateTime?, zoneId: ZoneId): LocalDateTime? {
     val zdt = input?.withZoneSameInstant(zoneId)
-    val ldt = zdt?.toLocalDateTime()
-    return ldt
+    return zdt?.toLocalDateTime()
 }
 

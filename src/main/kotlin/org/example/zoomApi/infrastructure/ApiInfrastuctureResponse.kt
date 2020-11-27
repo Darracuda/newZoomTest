@@ -1,4 +1,4 @@
-package org.example
+package org.example.zoomApi.infrastructure
 
 enum class ResponseType {
     Success, Informational, Redirection, ClientError, ServerError

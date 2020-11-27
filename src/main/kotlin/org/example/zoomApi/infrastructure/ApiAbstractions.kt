@@ -1,4 +1,4 @@
-package org.example
+package org.example.zoomApi.infrastructure
 
 typealias MultiValueMap = Map<String,List<String>>
 

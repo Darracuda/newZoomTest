@@ -1,7 +1,6 @@
-package org.example
+package org.example.zoomApi.adapters
 
 import com.squareup.moshi.*
-import java.lang.Exception
 import java.time.*
 import java.time.format.DateTimeFormatter
 
@@ -18,8 +17,7 @@ class JsonZonedDateTimeAdapter : JsonAdapter<ZonedDateTime>() {
         if (!s.endsWith("Z")) {
             throw IllegalArgumentException("Unable to convert DateTime from Json")
         }
-        val zdt = ZonedDateTime.parse(s)
-        return zdt
+        return ZonedDateTime.parse(s)
 
     }
 }

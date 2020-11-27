@@ -1,4 +1,4 @@
-package org.example
+package org.example.zoomApi.infrastructure
 
 import java.lang.RuntimeException
 
@@ -14,7 +14,7 @@ open class ClientException : RuntimeException {
 
      * @param   message   the detail message.
      */
-    constructor(message: kotlin.String) : super(message)
+    constructor(message: String) : super(message)
 
     companion object {
         private const val serialVersionUID: Long = 123L
