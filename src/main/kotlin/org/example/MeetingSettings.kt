@@ -39,9 +39,9 @@ data class MeetingSettings (
     val watermark: kotlin.Boolean? = null,
     /* Use Personal Meeting ID. Only used for scheduled meetings and recurring meetings with no fixed time. */
     val use_pmi: kotlin.Boolean? = null,
-    val approval_type: kotlin.Int? = null,
+    val approval_type: ApprovalType? = null,
     /* Registration type. Used for recurring meeting with fixed time only. */
-    val registration_type: kotlin.Int? = null,
+    val registration_type: RegistrationType? = null,
     /* Determine how participants can join the audio portion of the meeting */
     val audio: MeetingSettings.Audio? = null,
     val auto_recording: MeetingSettings.AutoRecording? = null,
@@ -62,13 +62,9 @@ data class MeetingSettings (
      * Values: both,telephony,voip
      */
     enum class Audio(val value: kotlin.String){
-
         @Json(name = "both") both("both"),
-
         @Json(name = "telephony") telephony("telephony"),
-
         @Json(name = "voip") voip("voip");
-
     }
 
     /**
@@ -76,13 +72,21 @@ data class MeetingSettings (
      * Values: local,cloud,none
      */
     enum class AutoRecording(val value: kotlin.String){
-
         @Json(name = "local") local("local"),
-
         @Json(name = "cloud") cloud("cloud"),
-
         @Json(name = "none") none("none");
+    }
 
+    enum class ApprovalType(val value: Int){
+        @Json(name = "1") automaticallyApprove(1),
+        @Json(name = "2") manuallyApprove(2),
+        @Json(name = "3") noRegistrationRequired(3),
+    }
+
+    enum class RegistrationType(val value: Int){
+        @Json(name = "0") registerOnceAndAttendAny(0),
+        @Json(name = "1") registerEach(1),
+        @Json(name = "2") registerOnceAndChoose(2),
     }
 
 }

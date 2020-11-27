@@ -1,5 +1,7 @@
 package org.example
 
+import java.time.ZonedDateTime
+
 /**
  *
  * @param MeetingInfo
@@ -8,21 +10,23 @@ package org.example
  * @param uuid Meeting unique ID
  */
 data class CreateMeetingResponse (
-    val MeetingInfo: MeetingInfo? = null,
+    //val MeetingInfo: MeetingInfo? = null,
     /* ID of the user set as host of meeting */
-    val host_id: kotlin.String? = null,
+    val host_id: String? = null,
     /* Meeting ID, also known as meeting number */
-    val id: kotlin.String? = null,
+    val id: String? = null,
     /* Meeting unique ID */
-    val uuid: kotlin.String? = null,
+    val uuid: String? = null,
     /* Meeting start time */
-    //val start_time: java.time.LocalDateTime? = null,
+    val start_time: ZonedDateTime? = null,
     /* Create time */
-    //val created_at: java.time.LocalDateTime? = null,
+    val created_at: ZonedDateTime? = null,
     /* Start url */
-    val start_url: kotlin.String? = null,
+    val start_url: String? = null,
     /* Join url */
-    val join_url: kotlin.String? = null,
-) {
+    val join_url: String? = null,
+    val encrypted_password: String? = null,
+    val pstn_password: String? = null,
+    val host_email: String? = null,
+)
 
-}
